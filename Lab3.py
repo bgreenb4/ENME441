@@ -9,7 +9,7 @@ highest_guess = 6
 for i in range(sequence_length):
 	i = str(random.randint(lowest_guess,highest_guess))
 	sequence.append(i)
-print(sequence)
+#print(sequence)
 
 turn_count = 1
 while turn_count < (max_turn + 1):
