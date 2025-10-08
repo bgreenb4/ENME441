@@ -5,39 +5,22 @@ import RPi.GPIO as GPIO
 GPIO.setmode(GPIO.BCM)
 
 Shifter = Shifter(23, 24, 25)
-pattern = 0b00000001
-pixel = 0
+#pattern = 0b00000001
+pattern = [1,2,4,8,16,32,64,128]
+location = 0
 
 def walk():
 	global pattern
-	global pixel
+	global location
 	
 	rand = random.choice([-1,1])
-	pixel = pixel + rand
-	if pixel < 0:
-		pixel = 0
-	if pixel > 7:
-		pixel = 7
-	
-	if pixel == 0:
-		pattern = 0b00000001
-	if pixel == 1:
-		pattern = 0b00000010
-	if pixel == 2:
-		pattern = 0b00000100
-	if pixel == 3:
-		pattern = 0b00001000
-	if pixel == 4:
-		pattern = 0b00010000
-	if pixel == 5:
-		pattern = 0b00100000
-	if pixel == 6:
-		pattern = 0b01000000
-	if pixel == 7:
-		pattern = 0b10000000
-	
-	pattern = 1 << pixel
-	return pattern
+	pixel = location + rand
+	if location < 0:
+		location = 0
+	if location > 7:
+		location = 7
+		
+	return pattern[location]
 
 try:
 	while 1:
@@ -53,3 +36,4 @@ try:
 except KeyboardInterrupt: # if user hits ctrl-C
 	print('\nExiting')
 	GPIO.cleanup()
+
