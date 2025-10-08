@@ -14,6 +14,6 @@ class Shifter:
   
   def shiftByte(self, b):
     for i in range(8):
-      GPIO.output(self.serialPin, (b>>i) & 1)
+      GPIO.output(self.serialPin, b & (1<<i))
       self.__ping(self.clockPin)
     self.__ping(self.latchPin)
