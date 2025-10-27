@@ -52,31 +52,34 @@ def parsePOSTdata(data):
 	return data_dict
 
 def serve_web_page():
-	s = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # TCP-IP socket
-	s.bind(('', 8080))
-	s.listen(3)  # up to 3 queued connections
-	try:
-		while True:
-			print('Waiting for connection...')
-			conn, (client_ip, client_port) = s.accept()     # blocking call
-			data_dict = parsePOSTdata(conn.recv(1024))
-			ledSelection = data_dict['led']
-			ledBrightness = data_dict['brightnessRange']
-			try:
-				conn.sendall(web_page())                  # body
-			finally:
-				conn.close()
-	except:
-		print('Closing socket')
-		s.close()
-
+    while True:
+		print('Waiting for connection...')
+		conn, (client_ip, client_port) = s.accept()     # blocking call
+		message = parsePOSTdata(conn.recv(1024))               # read request (required even if none)
+		print(message)
+				
+		conn.send(b'HTTP/1.1 200 OK\n')         # status line
+		conn.send(b'Content-type: text/html\n') # header (content type)
+		conn.send(b'Connection: close\r\n\r\n') # header (tell client to close at end)
+		# send body in try block in case connection is interrupted:
+		try:
+			conn.sendall(web_page())                  # body
+		finally:
+			conn.close()
+        
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # TCP-IP socket
+s.bind(('', 8080))
+s.listen(3)  # up to 3 queued connections
+    
 webpageThread = threading.Thread(target=serve_web_page)
 webpageThread.daemon = True
 webpageThread.start()
 
-
-# Do whatever we want while the web server runs in
-# a separate thread:
-while True:
-	sleep(1)
-	print('.')
+try:
+	while True:
+		pass
+except:
+	print('Joining webpageTread')
+	webpageTread.join()
+	print('Closing socket')
+	s.close()
