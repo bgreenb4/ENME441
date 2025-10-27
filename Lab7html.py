@@ -8,10 +8,10 @@ brightnessArray = [0,0,0]
 pwmArray = [17, 27, 22]
 
 for i in range(3):
-	GPIO.setup(pinArray[i],GPIO.OUT)
+	gpio.setup(pinArray[i], gpio.OUT)
 
 for i in range(3):
-	pwmTemp = GPIO.PWM(pinArray[i],f_base)
+	pwmTemp = gpio.PWM(pinArray[i], 500)
 	pwmArray.append(pwmTemp)
 
 pins = (19,21,22)
