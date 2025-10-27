@@ -52,25 +52,25 @@ def parsePOSTdata(data):
 	return data_dict
 
 def serve_web_page():
-    while True:
+	while True:
 		print('Waiting for connection...')
-		conn, (client_ip, client_port) = s.accept()     # blocking call
-		message = parsePOSTdata(conn.recv(1024))               # read request (required even if none)
+		conn, (client_ip, client_port) = s.accept()
+		message = parsePOSTdata(conn.recv(1024)) 
 		print(message)
 				
-		conn.send(b'HTTP/1.1 200 OK\n')         # status line
-		conn.send(b'Content-type: text/html\n') # header (content type)
-		conn.send(b'Connection: close\r\n\r\n') # header (tell client to close at end)
-		# send body in try block in case connection is interrupted:
+		conn.send(b'HTTP/1.1 200 OK\n')
+		conn.send(b'Content-type: text/html\n')
+		conn.send(b'Connection: close\r\n\r\n')
+		
 		try:
-			conn.sendall(web_page())                  # body
+			conn.sendall(web_page())
 		finally:
 			conn.close()
-        
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # TCP-IP socket
+
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.bind(('', 8080))
-s.listen(3)  # up to 3 queued connections
-    
+s.listen(3)
+
 webpageThread = threading.Thread(target=serve_web_page)
 webpageThread.daemon = True
 webpageThread.start()
