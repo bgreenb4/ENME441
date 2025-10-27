@@ -5,7 +5,8 @@ from time import sleep
 
 gpio.setmode(gpio.BCM)
 brightnessArray = [0,0,0]
-pwmArray = [17, 27, 22]
+pinArray = [17, 27, 22]
+pwmArray = []
 
 for i in range(3):
 	gpio.setup(pinArray[i], gpio.OUT)
