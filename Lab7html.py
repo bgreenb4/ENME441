@@ -55,8 +55,9 @@ def serve_web_page():
 	while True:
 		print('Waiting for connection...')
 		conn, (client_ip, client_port) = s.accept()
-		message = parsePOSTdata(conn.recv(1024)) 
-		print(message)
+		client_message = conn.recv(2048).decode('utf-8')
+		print(f'Message from client:\n{client_message}')
+		data_dict = parsePOSTdata(client_message)
 				
 		conn.send(b'HTTP/1.1 200 OK\n')
 		conn.send(b'Content-type: text/html\n')
