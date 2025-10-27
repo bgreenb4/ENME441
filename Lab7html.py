@@ -14,8 +14,8 @@ def web_page():
 		<html>
 			<style>
   				body {
-    				border: 1px solid black; /* Sets a 5px solid blue border */
-  				}
+					border: 1px solid black; /* Sets a 5px solid blue border */
+				}
 			</style>
 
 			<body>
@@ -25,16 +25,16 @@ def web_page():
 
 				Select LED: <br>
 				<input type="radio" id="led1" name="led" value="HIGH">
-  				<label for="led1">LED 1</label> <br>
+				<label for="led1">LED 1</label> <br>
 
-  				<input type="radio" id="led2" name="led" value="HIGH">
-  				<label for="led2">LED 2</label> <br>
+				<input type="radio" id="led2" name="led" value="HIGH">
+				<label for="led2">LED 2</label> <br>
 
-  				<input type="radio" id="led3" name="led" value="HIGH">
-  				<label for="led3">LED 3</label> <br>
+				<input type="radio" id="led3" name="led" value="HIGH">
+				<label for="led3">LED 3</label> <br>
 
-    			<br>
-    			<input type="submit" id="submit" name="submit" value="Change Brightness"
+				<br>
+				<input type="submit" id="submit" name="submit" value="Change Brightness"
 			</body>
 		</html>
 	"""
