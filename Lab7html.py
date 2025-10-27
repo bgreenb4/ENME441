@@ -4,6 +4,15 @@ import threading
 from time import sleep
 
 gpio.setmode(gpio.BCM)
+brightnessArray = [0,0,0]
+pwmArray = [17, 27, 22]
+
+for i in range(3):
+	GPIO.setup(pinArray[i],GPIO.OUT)
+
+for i in range(3):
+	pwmTemp = GPIO.PWM(pinArray[i],f_base)
+	pwmArray.append(pwmTemp)
 
 pins = (19,21,22)
 for p in pins:
@@ -59,8 +68,8 @@ def serve_web_page():
 		print(f'Message from client:\n{client_message}')
 		data_dict = parsePOSTdata(client_message)
 				
-		conn.send(b'HTTP/1.1 200 OK\n')
-		conn.send(b'Content-type: text/html\n')
+		conn.send(b'HTTP/1.1 200 OK\r\n')
+		conn.send(b'Content-type: text/html\r\n')
 		conn.send(b'Connection: close\r\n\r\n')
 		
 		try:
