@@ -81,6 +81,6 @@ try:
 		pass
 except:
 	print('Joining webpageTread')
-	webpageTread.join()
+	webpageThread.join()
 	print('Closing socket')
 	s.close()
