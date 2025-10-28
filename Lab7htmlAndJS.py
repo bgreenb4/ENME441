@@ -45,8 +45,16 @@ def web_page(brightnessArray):
 				}
 				.label-line {
 					display: flex;
-					justify-content: space-between;
 					align-items: center;
+					justify-content: space-between;
+					gap: 10px;
+				}
+				.label-line input[type=range] {
+					flex-grow: 1;
+				}
+				.label-line span {
+					width: 40px;
+					textalign: right;
 				}
 			</style>
 		</head>
@@ -57,29 +65,31 @@ def web_page(brightnessArray):
 
 				<div class="led-control">
 					<div class="label-line">
-					<label for="led1">LED 1</label>
-					<span id="val1">0%</span>
+						<label>LED 1</label>
+						<input type="range" id="led1" min="0" max="100" value="0"
+							oninput="updateLED(0,this.value)">
+						<span id="val1">0%</span>
+					</div>
 				</div>
-				<input type="range" id="led1" min="0" max="100" value="0" oninput="updateLED(0,this.value)">
- 			</div>
 
-			<div class="led-control">
-				<div class="label-line">
-				<label for="led2">LED 2</label>
-				<span id="val2">0%</span>
+				<div class="led-control">
+					<div class="label-line">
+						<label>LED 2</label>
+						<input type="range" id="led2" min="0" max="100" value="0"
+							oninput="updateLED(1,this.value)">
+						<span id="val2">0%</span>
+					</div>
 				</div>
-				<input type="range" id="led2" min="0" max="100" value="0" oninput="updateLED(1,this.value)">
+
+				<div class="led-control">
+					<div class="label-line">
+						<label>LED 3</label>
+						<input type="range" id="led3" min="0" max="100" value="0"
+							oninput="updateLED(2,this.value)">
+						<span id="val3">0%</span>
+					</div>
+				</div>
 			</div>
-
-			<div class="led-control">
-				<div class="label-line">
-					<label for="led3">LED 3</label>
-					<span id="val3">0%</span>
-				</div>
-				<input type="range" id="led3" min="0" max="100" value="0" oninput="updateLED(2,this.value)">
-				</div>
-			</div>
-
 			<script>
 				function updateLED(ledIndex, brightness) {
 
