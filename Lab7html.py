@@ -24,6 +24,7 @@ def web_page(brightnessArray):
 			<style>
 				.container {{
 					border: 1px solid black; /* Sets a 5px solid blue border */
+					width: 230px;
 				}}
 			</style>
 
