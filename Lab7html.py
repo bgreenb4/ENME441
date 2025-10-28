@@ -19,7 +19,7 @@ for i in range(3):
 	pwmArray[i].start(0)
 
 def web_page():
-	html = """
+	html = f"""
 		<html>
 			<style>
 				body {
@@ -30,18 +30,18 @@ def web_page():
 			<body>
 			<form action="/" method="POST">
 				Brightness: <br>
-				<input type="range" id="myRange" name="brightnessRange" min="0" max="100" value="0"> <br>
+				<input type="range" id="myRange" name="brightnessRange" min="0" max="100" value="{brightnessArray[0]}"> <br>
 				<br>
 
 				Select LED: <br>
 				<input type="radio" id="led1" name="led" value="0">
-				<label for="led1">LED 1</label> <br>
+				<label for="led1">LED 1 ({brightnessArray[0]}%)</label> <br>
 
 				<input type="radio" id="led2" name="led" value="1">
-				<label for="led2">LED 2</label> <br>
+				<label for="led2">LED 2 ({brightnessArray[1]}%)</label> <br>
 
 				<input type="radio" id="led3" name="led" value="2">
-				<label for="led3">LED 3</label> <br>
+				<label for="led3">LED 3 ({brightnessArray[2]}%)</label> <br>
 
 				<br>
 				<input type="submit" value="Change Brightness">
@@ -73,6 +73,7 @@ def serve_web_page():
 		if 'brightnessRange' in data_dict and 'led' in data_dict:
 			led_index = int(data_dict['led'])
 			brightness = int(data_dict['brightnessRange'])
+			brightnessArray[led_index] = brightness
 			pwmArray[led_index].ChangeDutyCycle(brightness)
 
 		conn.send(b'HTTP/1.1 200 OK\r\n')
@@ -80,7 +81,7 @@ def serve_web_page():
 		conn.send(b'Connection: close\r\n\r\n')
 		
 		try:
-			conn.sendall(web_page())
+			conn.sendall(web_page(brightnessArray))
 		finally:
 			conn.close()
 
