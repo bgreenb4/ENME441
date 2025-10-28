@@ -113,8 +113,8 @@ def serve_web_page():
 		print(f'Message from client:\n{client_message}')
 		data_dict = parsePOSTdata(client_message)
 		
-		if "GET /set?" in req:
-			params = req.split(" ")[1].split("?")[1]
+		if "GET /set?" in client_message:
+			params = client_message.split(" ")[1].split("?")[1]
 			pairs = dict(p.split("=") for p in params.split("&"))
 			led = int(pairs.get("led", 0))
 			brightness = int(pairs.get("brightness", 0))
