@@ -22,9 +22,9 @@ def web_page(brightnessArray):
 	html = f"""
 		<html>
 			<style>
-				body {
+				body {{
 					border: 1px solid black; /* Sets a 5px solid blue border */
-				}
+				}}
 			</style>
 
 			<body>
