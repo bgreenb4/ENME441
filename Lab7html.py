@@ -29,6 +29,7 @@ def web_page():
 			</style>
 
 			<body>
+			<form action="/" method "POST">
 				Brightness: <br>
 				<input type="range" id="myRange" name="brightnessRange" min="0" max="100" value="0"> <br>
 				<br>
@@ -45,6 +46,7 @@ def web_page():
 
 				<br>
 				<input type="submit" id="submit" name="submit" value="Change Brightness"
+			</form>
 			</body>
 		</html>
 	"""
@@ -68,7 +70,12 @@ def serve_web_page():
 		client_message = conn.recv(2048).decode('utf-8')
 		print(f'Message from client:\n{client_message}')
 		data_dict = parsePOSTdata(client_message)
-				
+		
+		if 'brightnessRange' in data_dict and 'led' in data_dict:
+			led_index = int(data_dict['led'])
+			brightness = int(data_dict['brightnessRange'])
+			pwmArray[led_index].ChangeDutyCycle(brightness)
+
 		conn.send(b'HTTP/1.1 200 OK\r\n')
 		conn.send(b'Content-type: text/html\r\n')
 		conn.send(b'Connection: close\r\n\r\n')
@@ -93,4 +100,5 @@ except:
 	print('Joining webpageTread')
 	webpageThread.join()
 	print('Closing socket')
+	gpio.cleanup()
 	s.close()
