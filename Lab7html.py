@@ -15,6 +15,9 @@ for i in range(3):
 	pwmTemp = gpio.PWM(pinArray[i], 500)
 	pwmArray.append(pwmTemp)
 
+for i in range(3):
+	pwmArray[i].start(0)
+
 pins = (19,21,22)
 for p in pins:
 	gpio.setup(p,gpio.OUT)
@@ -35,13 +38,13 @@ def web_page():
 				<br>
 
 				Select LED: <br>
-				<input type="radio" id="led1" name="led" value="HIGH">
+				<input type="radio" id="led1" name="led" value="0">
 				<label for="led1">LED 1</label> <br>
 
-				<input type="radio" id="led2" name="led" value="HIGH">
+				<input type="radio" id="led2" name="led" value="1">
 				<label for="led2">LED 2</label> <br>
 
-				<input type="radio" id="led3" name="led" value="HIGH">
+				<input type="radio" id="led3" name="led" value="2">
 				<label for="led3">LED 3</label> <br>
 
 				<br>
