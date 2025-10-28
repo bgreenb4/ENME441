@@ -18,7 +18,7 @@ for i in range(3):
 for i in range(3):
 	pwmArray[i].start(0)
 
-def web_page():
+def web_page(brightnessArray):
 	html = f"""
 		<html>
 			<style>
