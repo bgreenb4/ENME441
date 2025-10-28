@@ -29,7 +29,7 @@ def web_page():
 			</style>
 
 			<body>
-			<form action="/" method "POST">
+			<form action="/" method="POST">
 				Brightness: <br>
 				<input type="range" id="myRange" name="brightnessRange" min="0" max="100" value="0"> <br>
 				<br>
@@ -45,7 +45,7 @@ def web_page():
 				<label for="led3">LED 3</label> <br>
 
 				<br>
-				<input type="submit" id="submit" name="submit" value="Change Brightness"
+				<input type="submit" value="Change Brightness"
 			</form>
 			</body>
 		</html>
