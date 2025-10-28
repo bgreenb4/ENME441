@@ -18,10 +18,6 @@ for i in range(3):
 for i in range(3):
 	pwmArray[i].start(0)
 
-pins = (19,21,22)
-for p in pins:
-	gpio.setup(p,gpio.OUT)
-
 def web_page():
 	html = """
 		<html>
@@ -48,7 +44,7 @@ def web_page():
 				<label for="led3">LED 3</label> <br>
 
 				<br>
-				<input type="submit" value="Change Brightness"
+				<input type="submit" value="Change Brightness">
 			</form>
 			</body>
 		</html>
