@@ -22,12 +22,13 @@ def web_page(brightnessArray):
 	html = f"""
 		<html>
 			<style>
-				body {{
+				.container {{
 					border: 1px solid black; /* Sets a 5px solid blue border */
 				}}
 			</style>
 
 			<body>
+			<div class="container">
 			<form action="/" method="POST">
 				Brightness: <br>
 				<input type="range" id="myRange" name="brightnessRange" min="0" max="100" value="{brightnessArray[0]}"> <br>
@@ -46,6 +47,7 @@ def web_page(brightnessArray):
 				<br>
 				<input type="submit" value="Change Brightness">
 			</form>
+			</div>
 			</body>
 		</html>
 	"""
